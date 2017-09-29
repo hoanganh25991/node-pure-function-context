@@ -52,11 +52,23 @@ const doPageXNeedResult = lastResult => {
   return doPageX
 }
 
+const window = {};
+
+const doActionHackGlobal = action => {
+  const askForJump = window.jump
+  if(isFunction(askForJump)){
+    askForJump(action)
+  }
+}
+
+
 const run = () => {
   const page = {page: "pageX"}
   const action = {action: "actionX"}
-  s.store(doPageX(page)(action))
-  console.log(s.get())
+  // s.store(doPageX(page)(action))
+  // console.log(s.get())
+  window.jump = () => console.log("ᕕ( ᐛ )ᕗ");
+  const result = doActionHackGlobal(action)
 }
 
 run()
