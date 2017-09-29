@@ -20,6 +20,29 @@ const s = StoreResult();
 const doX = action => action
 
 
+// const injectPage = page => callback => args => callback(page)(args)
+// ABOVE function not good, it should do single thing
+// if doPageX need page, it should like
+// const doPageX = page => action => ({page, action})
+// Then self call
+// doPageX(page)(action)
+// injectPage mess up thing
+// injectPage(page)(doPageX)(action) <=== extra injectPage make this happens
+//
+// if doAction not only need page, but also need lastResult
+// it will look like
+// const doPageXNeedResult = lastResult => {
+//   console.log(lastResult)
+//   return doPageX
+// }
+// but if independency use lastResult is not enough
+// >>> have to declare new function, which touch on lastResult
+// to do whole new logic
+
+//=======================================================================
+// IN SHORT, WE CANT PASS RESULT INTO CONTEXT OF ANOTHER PURE FUNCTION
+//=======================================================================
+
 //=============================================
 // inject by pure function
 //=============================================
